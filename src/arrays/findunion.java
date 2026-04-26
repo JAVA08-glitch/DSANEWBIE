@@ -3,30 +3,36 @@ import java.util.*;
 
 public class findunion {
     static int[] unionarray(int[] arr1, int[] arr2) {
-        int n1 = arr1.length;
-        int n2 = arr2.length, idxl = 0, idxr = 0, k = 0;
-        Arrays.sort(arr1);
-        Arrays.sort(arr2);
-        int[] ans = new int[n1 + n2];
-        while (idxl < n1 && idxr < n2) {
-            if (arr1[idxl] < arr2[idxr]) {
-                ans[k++] = arr1[idxl++];
-            } else if (arr2[idxr] < arr1[idxr]) {
-                ans[k++] = arr2[idxr++];
-            } else if (arr2[idxr] == arr1[idxl]) {
 
-                ans[k++] = arr1[idxl++];
-                idxr++;
-            }
+        int m=arr1.length,n=arr2.length;
+          int[] ans=new int[m+n];
+          int i=0,j=0,k=0;
+          while(i<m && j<n){
+             if(arr1[i]<arr2[j]){
+                 ans[k++]=arr1[i++];
+             }else if(arr2[j]<arr1[i]){
+                 ans[k++]=arr2[j++];
 
+             }else if(arr1[i]==arr2[j]){
+                 ans[k++]=arr1[i++];
 
-        }while(idxl<n1){
-            ans[k++]=arr1[idxl++];
+             }
+          }while(i<m){
+              ans[k++]=arr1[i++];
+        }while(j<n){
+              ans[k++]=arr2[j++];
+        }
+          LinkedHashSet<Integer> hs=new LinkedHashSet<>();
+          for(int val:ans){
+              hs.add(val);
+          }
+          int[] finalans=new int[hs.size()];
+          int p=0;
+          for(Integer val:hs){
+              finalans[p++]=val.intValue();
+          }
 
-        }while(idxr<n2){
-            ans[k++]=arr2[idxr++];
-
-        }return ans;
+return finalans;
     }
 
     public static void main(String[] args) {
